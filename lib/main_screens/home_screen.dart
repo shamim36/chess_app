@@ -1,3 +1,4 @@
+import 'package:chess_app/main_screens/game_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,67 +22,68 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: GridView.count(
-        crossAxisCount: 2,
-        children:const [
-          Card(
-            child: Center(
-              child: Column(
-                mainAxisAlignment : MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.computer),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text('Player vs Computer'),
-                ],
-              ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GridView.count(
+          crossAxisCount: 2,
+          children: [
+            buildGameType(
+              label: 'Player vs Computer',
+              icon: Icons.computer,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const GameScreen()),
+                );
+              },
             ),
-          ),
-          Card(
-            child: Center(
-              child: Column(
-                mainAxisAlignment : MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.group),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text('Play With Frind'),
-                ],
-              ),
+            buildGameType(
+              label: 'Play With Friend',
+              icon: Icons.group,
+              onTap: () {},
             ),
-          ),
-          Card(
-            child: Center(
-              child: Column(
-                mainAxisAlignment : MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.settings),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text('Settings'),
-                ],
-              ),
+            buildGameType(
+              label: 'Settings',
+              icon: Icons.settings,
+              onTap: () {},
             ),
-          ),
-          Card(
-            child: Center(
-              child: Column(
-                mainAxisAlignment : MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.info),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text('About'),
-                ],
-              ),
+            buildGameType(
+              label: 'About',
+              icon: Icons.info,
+              onTap: () {},
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
+}
+
+Widget buildGameType(
+    {required String label,
+    String? gameTime,
+    IconData? icon,
+    required Function() onTap}) {
+  return InkWell(
+    onTap: onTap,
+    child: Card(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            icon != null ? Icon(icon) : Text(gameTime!),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              label,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
 }
