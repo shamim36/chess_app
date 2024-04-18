@@ -5,6 +5,8 @@ import 'package:chess_app/providers/game_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../constant.dart';
+
 class GameTimeScreeen extends StatefulWidget {
   const GameTimeScreeen({super.key});
 
@@ -55,12 +57,27 @@ class _GameTimeScreeenState extends State<GameTimeScreeen> {
               label: label,
               gameTime: gameTime,
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const GameStartUpScreen(),
-                  ),
-                );
+                if (label == Constants.custom) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => GameStartUpScreen(
+                        isCustomTime: true,
+                        gameTime: gameTime,
+                      ),
+                    ),
+                  );
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => GameStartUpScreen(
+                        isCustomTime: false,
+                        gameTime: gameTime,
+                      ),
+                    ),
+                  );
+                }
               },
             );
           },
