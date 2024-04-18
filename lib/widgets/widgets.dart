@@ -18,7 +18,12 @@ class PlayerColorRadioButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RadioListTile<PlayerColor>(
-      title: Text(title),
+      title: Text(
+        title,
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
       value: value,
       dense: true,
       shape: RoundedRectangleBorder(
@@ -28,6 +33,44 @@ class PlayerColorRadioButton extends StatelessWidget {
       tileColor: Colors.grey[300],
       groupValue: groupValue,
       onChanged: onChanged,
+    );
+  }
+}
+
+class GameLevelRadioButton extends StatelessWidget {
+  const GameLevelRadioButton(
+      {super.key,
+      required this.title,
+      required this.value,
+      required this.groupValue,
+      required this.onChanged});
+
+  final String title;
+  final GameDifficulty value;
+  final GameDifficulty? groupValue;
+  final Function(GameDifficulty?)? onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final capitalizedTitle = title[0].toUpperCase() + title.substring(1);
+    return Expanded(
+      child: RadioListTile<GameDifficulty>(
+        title: Text(
+          capitalizedTitle,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        value: value,
+        dense: true,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        contentPadding: EdgeInsets.zero,
+        tileColor: Colors.grey[300],
+        groupValue: groupValue,
+        onChanged: onChanged,
+      ),
     );
   }
 }
